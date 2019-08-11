@@ -5,7 +5,8 @@ Class {
 	#name : #Boop,
 	#superclass : #BlElement,
 	#instVars : [
-		'map'
+		'map',
+		'aLayoutConstraints'
 	],
 	#category : #Boop
 }
@@ -14,6 +15,16 @@ Class {
 Boop >> backgroundPaint [ 
 	| |
 	^ Color lightBlue 
+]
+
+{ #category : #drawing }
+Boop >> drawBoard [
+	|  |
+	
+	1 to: 5 do: 
+		[ :n || tile |
+		tile := BoopTile  new: (n asString) .
+		self addChild: tile ]
 ]
 
 { #category : #drawing }
@@ -27,16 +38,9 @@ Boop >> drawOnSpartaCanvas: aCanvas [
 
 { #category : #initialization }
 Boop >> initialize [ 
-	"comment stating purpose of message"
-
 	|  |
 	super initialize.
-	self size: 80 @ 80.
-]
-
-{ #category : #initialization }
-Boop >> initialize: aBounds [
-	| |
-	super initialize.
-	self size: aBounds.
+	self layout: BlGridLayout horizontal.
+	self drawBoard.
+	
 ]
