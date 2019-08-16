@@ -21,7 +21,7 @@ BoopTile >> drawOnSpartaCanvas: aCanvas [
 		paint: self backgroundPaint;
 		path: self boundsInLocal;
 		draw.
-	self drawText: num on: aCanvas.	
+	"self drawText: num on: aCanvas.	"
 ]
 
 { #category : #drawing }
@@ -35,6 +35,7 @@ BoopTile >> drawText: text on: aCanvas [
 		font: font;
 		paint: Color white;
 		string: text.
+	Transcript show: text; cr.
 	metrics := textPainter measure.
 	origin := (self extent - metrics textMetrics bounds extent) / 2.0.
 	origin := origin - metrics textMetrics bounds origin.
@@ -49,7 +50,7 @@ BoopTile >> initialize [
 	super initialize.
 	num := 1.
 	self geometry: BlRectangle new.
-	size := 25
+	self geometry extent: 100@100
 ]
 
 { #category : #initialization }
@@ -58,5 +59,11 @@ BoopTile >> initialize: aNum [
 	super initialize.
 	num := aNum.
 	self geometry: BlRectangle new.
-	size := 25
+	self geometry extent: 100@100
+]
+
+{ #category : #accessing }
+BoopTile >> num: n [
+	| |
+	num := n.
 ]

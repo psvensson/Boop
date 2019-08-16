@@ -19,12 +19,14 @@ Boop >> backgroundPaint [
 
 { #category : #drawing }
 Boop >> drawBoard [
-	|  |
-	
+	|  |	
 	1 to: 5 do: 
 		[ :n || tile |
-		tile := BoopTile  new: (n asString) .
-		self addChild: tile ]
+		Transcript show: 'making new BoopTile';cr.
+		tile := BoopTile  new.
+		tile num: n.
+		self addChild: tile.
+		]
 ]
 
 { #category : #drawing }
@@ -41,6 +43,10 @@ Boop >> initialize [
 	|  |
 	super initialize.
 	self layout: BlGridLayout horizontal.
+	self
+		constraintsDo: [ :c |
+		c horizontal fitContent.
+		c vertical fitContent ].
 	self drawBoard.
 	
 ]
