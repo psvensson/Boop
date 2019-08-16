@@ -11,7 +11,7 @@ Class {
 { #category : #accessing }
 BoopTile >> backgroundPaint [ 
 	| |
-	^ Color lightYellow  
+	^ Color darkGray   
 ]
 
 { #category : #drawing }
@@ -21,7 +21,7 @@ BoopTile >> drawOnSpartaCanvas: aCanvas [
 		paint: self backgroundPaint;
 		path: self boundsInLocal;
 		draw.
-	"self drawText: num on: aCanvas.	"
+	self drawText: (num asString) on: aCanvas.	
 ]
 
 { #category : #drawing }
