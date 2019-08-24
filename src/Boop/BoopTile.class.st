@@ -16,9 +16,9 @@ BoopTile >> backgroundPaint [
 
 { #category : #drawing }
 BoopTile >> drawBorderPolygonOn: aCanvas [
-	|rect vertices|
+	|rect vertices polygon|
 	
-	rect := Rectangle point: (0@0) point: (150@30).
+	rect := Rectangle point: (0@0) point: (30@30).
 	vertices := { 
     (rect left)@(rect top + 2).
     (rect left + 2)@(rect top).
@@ -28,9 +28,12 @@ BoopTile >> drawBorderPolygonOn: aCanvas [
     (rect right - 3)@(rect bottom -1).
     (rect left + 2)@(rect bottom - 1).
     (rect left)@(rect bottom - 3).
-    "(rect left)@(rect top + 2)" }.
-    
-	aCanvas drawPolygon: vertices fillStyle: Color orange borderWidth: 1 borderColor: Color black.
+    (rect left)@(rect top + 2) }.
+
+	polygon := (BlPolygon vertices: vertices) asElement.
+	
+	self addChild: polygon		
+ 	  
 ]
 
 { #category : #drawing }
@@ -40,8 +43,8 @@ BoopTile >> drawOnSpartaCanvas: aCanvas [
 		paint: self backgroundPaint;
 		path: self boundsInLocal;
 		draw.
-	self drawText: (num asString) on: aCanvas.	
-	"self drawBorderPolygonOn: aCanvas.	"
+	self drawText: (num asString) on: aCanvas.
+	self drawBorderPolygonOn: aCanvas.	
 	
 	
 
