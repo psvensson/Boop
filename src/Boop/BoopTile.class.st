@@ -37,6 +37,31 @@ BoopTile >> drawBorderPolygonOn: aCanvas [
 ]
 
 { #category : #drawing }
+BoopTile >> drawHexagon [
+	| vertices polygon |
+	"canvasContext.beginPath();
+        canvasContext.moveTo(x + hexRadius, y);
+        canvasContext.lineTo(x + hexRectangleWidth, y + hexHeight);
+        canvasContext.lineTo(x + hexRectangleWidth, y + hexHeight + sideLength);
+        canvasContext.lineTo(x + hexRadius, y + hexRectangleHeight);
+        canvasContext.lineTo(x, y + sideLength + hexHeight);
+        canvasContext.lineTo(x, y + hexHeight);
+        canvasContext.closePath();"
+	vertices := { 
+    (self hexRadius )@0.
+    (self hexRectangleWidth )@(self hexHeight ).
+    (self hexRectangleWidth)@(self hexHeight + self sideLength ).
+    (self hexRadius )@(self hexRectangleHeight ).
+    (0)@(self sideLength  + self hexHeight ).
+    (0)@(self hexHeight ).
+   }.
+
+	polygon := (BlPolygon vertices: vertices) asElement.
+	self addChild: polygon.
+	
+]
+
+{ #category : #drawing }
 BoopTile >> drawOnSpartaCanvas: aCanvas [
 	|  |
 	aCanvas fill
@@ -44,7 +69,7 @@ BoopTile >> drawOnSpartaCanvas: aCanvas [
 		path: self boundsInLocal;
 		draw.
 	self drawText: (num asString) on: aCanvas.
-	self drawBorderPolygonOn: aCanvas.	
+	self drawHexagon.	
 	
 	
 
@@ -109,7 +134,7 @@ BoopTile >> initialize [
 	super initialize.
 	num := 1.
 	self geometry: BlRectangle new.
-	self geometry extent: 200@200
+	self geometry extent: 300@300
 ]
 
 { #category : #initialization }
@@ -130,7 +155,7 @@ BoopTile >> num: n [
 
 { #category : #data }
 BoopTile >> sideLength [
-	^ 10
+	^ 30
 ]
 
 { #category : #'visual properties' }
