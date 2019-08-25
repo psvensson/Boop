@@ -74,6 +74,35 @@ BoopTile >> drawText: text on: aCanvas [
 		draw
 ]
 
+{ #category : #data }
+BoopTile >> hexHeight [
+ "Math.sin(hexagonAngle) * sideLength;"
+	^ (self hexagonAngle sin ) * self sideLength 
+]
+
+{ #category : #data }
+BoopTile >> hexRadius [
+	"Math.cos(hexagonAngle) * sideLength;"
+	^ (self hexagonAngle sin) * self sideLength.
+]
+
+{ #category : #data }
+BoopTile >> hexRectangleHeight [
+	"sideLength + 2 * hexHeight"
+	^ self sideLength + (2 * self hexHeight )
+]
+
+{ #category : #data }
+BoopTile >> hexRectangleWidth [
+	"2 * hexRadius"
+	^ 2 * self hexRadius 
+]
+
+{ #category : #data }
+BoopTile >> hexagonAngle [
+	^ 0.523598776
+]
+
 { #category : #initialization }
 BoopTile >> initialize [ 
 	|  |
@@ -97,6 +126,11 @@ BoopTile >> initialize: aNum [
 BoopTile >> num: n [
 	| |
 	num := n.
+]
+
+{ #category : #data }
+BoopTile >> sideLength [
+	^ 10
 ]
 
 { #category : #'visual properties' }
